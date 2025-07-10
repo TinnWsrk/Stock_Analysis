@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login - Stock Analysis</title>
+    <title>Register - Stock Analysis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #2e2e2e; /* Dark grey background */
         }
         .app-title {
-            font-size: 3rem;
+            font-size: 2rem;
             text-align: center;
             margin-bottom: 20px;
         }
         .app-title .stock {
-            color: #55d172; /* Bootstrap green */
+            color: #55d172; 
         }
         .app-title .analysis {
-            color: #7a4ed1; /* Bootstrap violet/purple */
+            color: #7a4ed1; 
         }
     </style>
 </head>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
-            <h2 class="mb-3 text-center">Login</h2>
+            <h2 class="mb-3 text-center">Register</h2>
 
             {% if error %}
                 <div class="alert alert-danger" role="alert">
@@ -47,13 +47,19 @@
                     <input type="password" name="password" class="form-control" id="password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <div class="mb-3">
+                    <label for="confirm" class="form-label">Confirm Password</label>
+                    <input type="password" name="confirm" class="form-control" id="confirm" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Register</button>
             </form>
             <div class="text-center mt-3">
-                <a href="{{ url_for('auth.register') }}" class="text-decoration-none text-primary">
-                    Don't have an account? Register here
+                <a href="{{ url_for('auth.login') }}" class="text-decoration-none text-primary">
+                    Already have an account? Log in
                 </a>
             </div>
+
         </div>
     </div>
 
