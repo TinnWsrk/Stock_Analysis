@@ -8,12 +8,12 @@ def login():
         email = request.form["email"]
         password = request.form["password"]
 
-        # Dummy-Login (ersetzbar durch echte DB später)
+        # Dummy-Login (with real DB later)
         if email == "admin" and password == "1234":
             session['logged_in'] = True
             return redirect(url_for('main'))
         else:
-            return "Login fehlgeschlagen!"
+            return render_template("login.html", error = "login failed!")
     return render_template("login.html")
 
 #@auth.route('/logout')
