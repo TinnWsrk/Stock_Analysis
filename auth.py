@@ -1,22 +1,27 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from werkzeug.security import check_password_hash
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login', methods = ['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
 
-        # Dummy-Login (with real DB later)
-        if email == "admin" and password == "1234":
+        #1. Look up user by email
+        user = User.query.filter_by(email=email).first()
+
+        #2. Check if user exists and password correct
+        if user and check_password_hash(user.password, password):
             session['logged_in'] = True
+            session['user_email'] = user.email  
             return redirect(url_for('main'))
         else:
-            return render_template("login.html", error = "user name or password is incorrect!")
+            return render_template("login.html", error="Invalid email or password.")
+
     return render_template("login.html")
 
 @auth.route('/register', methods=['GET', 'POST'])
