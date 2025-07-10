@@ -1,4 +1,4 @@
-#!/home/tinnwongsirikul/Schreibtisch/Stock_Analysis/venv/bin/python3
+#!/home/sant/Desktop/Stock_Analysis/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
