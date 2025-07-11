@@ -37,11 +37,11 @@ def main():
             graph_html = process_csv(file, app.config['UPLOAD_FOLDER'])
     return render_template("index.html", graph_html=graph_html)
 
-# Add temporarily for debug
-#@app.route("/debug-users")
-#def debug_users():
-#    users = User.query.all()
-#    return "<br>".join([f"{u.id}: {u.email} | {u.password}" for u in users])
+#Add temporarily for debug
+@app.route("/debug-users")
+def debug_users():
+   users = User.query.all()
+   return "<br>".join([f"{u.id}: {u.email} | {u.password}" for u in users])
 
 
 # Projekt starten
