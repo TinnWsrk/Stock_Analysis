@@ -30,12 +30,14 @@ def main():
     if not session.get('logged_in'):
         return redirect(url_for('auth.login'))
 
+    user_email = session.get('user_email') #get email
     graph_html = None
+
     if request.method == "POST":
         file = request.files["csvfile"]
         if file:
             graph_html = process_csv(file, app.config['UPLOAD_FOLDER'])
-    return render_template("index.html", graph_html=graph_html)
+    return render_template("index.html", graph_html=graph_html, user_email=user_email)
 
 #Add temporarily for debug
 @app.route("/debug-users")
@@ -51,6 +53,3 @@ if __name__ == "__main__":
         os.makedirs(app.config['UPLOAD_FOLDER'])
 
     app.run(debug=True)
-
-
-

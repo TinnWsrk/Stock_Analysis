@@ -7,6 +7,10 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    success_message = None
+    if session.pop('register_success', None):
+        success_message = "Account created successfully. You can now log in."
+
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
@@ -22,7 +26,7 @@ def login():
         else:
             return render_template("login.html", error="Invalid email or password.")
 
-    return render_template("login.html")
+    return render_template("login.html", success=success_message)
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -46,6 +50,9 @@ def register():
         new_user = User(email=email, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
+
+        session['register_success'] = True
+        return redirect(url_for('auth.login'))
 
         return redirect(url_for('auth.login'))
 
